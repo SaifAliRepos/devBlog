@@ -1,0 +1,35 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @post %>
+
+<br/>
+
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.cmnt %>
+  </p>
+<% end %>
+
+
+<h2>Add a comment:</h2>
+<%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <p>
+    <%= form.label :cmnt %><br>
+    <%= form.text_field :cmnt %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+
+<br/>
+
+<div>
+  <%= link_to "Edit this post", edit_post_path(@post) %> |
+  <%= link_to "Back to posts", posts_path %>
+
+  <%= button_to "Destroy this post", @post, method: :delete %>
+</div>

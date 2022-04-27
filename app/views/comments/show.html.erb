@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @comment %>
+<br/>
+<%= button_to 'Like It', post_likes_path(@post), method: :post %>
+<br/>
+<p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+
+<div>
+  <%= link_to "Edit this comment", edit_comment_path(@comment) %> |
+  <%= link_to "Back to comments", comments_path %>
+
+  <%= button_to "Destroy this comment", @comment, method: :delete %>
+</div>

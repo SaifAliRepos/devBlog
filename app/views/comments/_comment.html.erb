@@ -1,0 +1,11 @@
+<div id="<%= dom_id comment %>">
+  <p>
+    <strong>Cmnt:</strong>
+    <%= comment.cmnt %>
+  </p>
+
+<%= button_to 'Like Comment', post_comment_likecs_path(@post, comment), method: :post %>
+<br/>
+<p><%= comment.likecs.count %> <%= (comment.likecs.count) == 1 ? 'Like' : 'Likes'%></p>
+
+</div>

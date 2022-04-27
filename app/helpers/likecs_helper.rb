@@ -1,0 +1,2 @@
+module LikecsHelper
+end

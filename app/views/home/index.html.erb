@@ -1,0 +1,9 @@
+<% name = current_user.present? ? current_user.email : 'Stranger' %>
+
+<% if user_signed_in? %>
+  <h1>Welcome, <%= name %> </h1>
+  <%= render 'shared/checks' %>
+<% else %>
+  <h1>Welcome, <%= name %> </h1>
+  <%= render Post.all %>
+<% end %>

@@ -1,0 +1,36 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @post %>
+
+<br/>
+<%= button_to 'Like It', post_likes_path(@post), method: :post %>
+<br/>
+<p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+
+
+
+
+<h2>Comments</h2>
+<%= render @post.comments %>
+
+
+<h2>Add a comment:</h2>
+<%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <p>
+    <%= form.label :cmnt %><br>
+    <%= form.text_field :cmnt %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+
+<br/>
+
+<div>
+  <%= link_to "Edit this post", edit_post_path(@post) %> |
+  <%= link_to "Back to posts", posts_path %>
+
+  <%= button_to "Destroy this post", @post, method: :delete %>
+</div>
