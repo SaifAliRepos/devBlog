@@ -70,6 +70,10 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'will_paginate', '~> 3.3'
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 gem "devise", "~> 4.8"

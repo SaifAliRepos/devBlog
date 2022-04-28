@@ -4,6 +4,7 @@ class CreatePosts < ActiveRecord::Migration[7.0]
       t.belongs_to :user, foreign_key: true
       t.string :name
       t.string :title
+      t.string :status, default: 'pending'
 
       t.timestamps
     end
