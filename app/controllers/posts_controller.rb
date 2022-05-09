@@ -3,6 +3,13 @@ require 'will_paginate/array'
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
+  def report
+    if user_signed_in?
+      @post = Post.find(params[:id]) #place custom id here and it will report
+      UserMailer.with(post: @post).report_email.deliver_now
+    end
+  end
+
   # GET /posts or /posts.json
   def index
     @currentUser = current_user.id

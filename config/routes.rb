@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/postss', to: 'posts#index2'
+  post '/report', to: 'posts#report', as: 'report'
+
   get 'home/index'
   root to: "home#index"
   #root to: "posts#index2"

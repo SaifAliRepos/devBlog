@@ -1,11 +1,6 @@
 <div id="<%= dom_id comment %>">
   <p>
-    <strong>Cmnt:</strong>
     <%= comment.cmnt %>
   </p>
-
-<%= button_to 'Like Comment', post_comment_likecs_path(@post, comment), method: :post %>
-<br/>
-<p><%= comment.likecs.count %> <%= (comment.likecs.count) == 1 ? 'Like' : 'Likes'%></p>
-
+  <%=  button_to comment.likecs.count.to_s + ' Likes', post_comment_likecs_path(@post, comment), method: :post, :class => "btn btn-outline-dark btn-sm px-4 me-md-2 fw-bold sty mb-2" %>
 </div>

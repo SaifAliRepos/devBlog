@@ -1,36 +1,27 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @post %>
-
-<br/>
-<%= button_to 'Like It', post_likes_path(@post), method: :post %>
-<br/>
-<p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
-
-
-
-
-<h2>Comments</h2>
-<%= render @post.comments %>
-
-
-<h2>Add a comment:</h2>
-<%= form_with model: [ @post, @post.comments.build ] do |form| %>
-  <p>
-    <%= form.label :cmnt %><br>
-    <%= form.text_field :cmnt %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
-
-
-<br/>
-
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+<% if user_signed_in? %>
+  <%= render @post %>
+  <%=  button_to @post.likes.count.to_s + ' Likes', post_likes_path(@post), method: :post, :class => "btn btn-outline-danger px-4 me-md-2 fw-bold ml-5 sty" %>
+  <br/>
+  <div class = "ml-5">
+    <strong>Comments!</strong>
+    <%= render @post.comments %>
+    <%= form_with model: [ @post, @post.comments.build ] do |form| %>
+      <p>
+        <%= form.label :Comment %><br>
+        <%= form.text_field :cmnt %>
+      </p>
+      <p>
+        <%= form.submit 'Post', :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold"%>
+      </p>
+    <% end %>
+    <br/>
+    <div>
+      <%= link_to "Edit this post", edit_post_path(@post) %> |
+      <%= link_to "Back to posts", posts_path %>
+      <%= button_to "Destroy this post", @post, method: :delete %>
+    </div>
+  <%else%>
+    <p class="text-center" style="color: green">Sign In First!</p>
+  <%end%>
 </div>
