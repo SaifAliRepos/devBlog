@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+ With Active storage we can add attachments on models like one or many images
+

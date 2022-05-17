@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand bold " href="/">
-      <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="red" class="bi bi-chat-heart" viewBox="0 0 16 19">
-        <path fill-rule="evenodd" d="M2.965 12.695a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2Zm-.8 3.108.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125ZM8 5.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-sunglasses mr-2" viewBox="0 0 16 16">
+        <path d="M3 5a2 2 0 0 0-2 2v.5H.5a.5.5 0 0 0 0 1H1V9a2 2 0 0 0 2 2h1a3 3 0 0 0 3-3 1 1 0 1 1 2 0 3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-.5h.5a.5.5 0 0 0 0-1H15V7a2 2 0 0 0-2-2h-2a2 2 0 0 0-1.888 1.338A1.99 1.99 0 0 0 8 6a1.99 1.99 0 0 0-1.112.338A2 2 0 0 0 5 5H3zm0 1h.941c.264 0 .348.356.112.474l-.457.228a2 2 0 0 0-.894.894l-.228.457C2.356 8.289 2 8.205 2 7.94V7a1 1 0 0 1 1-1z"/>
       </svg>
-      DevBlog
+      D E V B L O G |
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,7 +13,7 @@
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to 'My Posts', posts_path, class: 'nav-link' %>
+            <%= link_to 'Dashboard', posts_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
             <%= link_to 'All Posts', postss_path, class: 'nav-link' %>
@@ -42,15 +42,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav">
             <% if user_signed_in? %>
+               <li class="nav-item">
+                <%= link_to current_user.name, new_user_session_path, class: 'nav-link', :class => "ml-2 btn btn-outline-dark px-4 me-md-2 fw-bold" %>
+              </li>
               <li class="nav-item">
-                <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+                <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link', :class => "ml-2 btn btn-outline-danger px-4 me-md-2 fw-bold" %>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+                <%= link_to 'Sign In', new_user_session_path , :class => "btn btn-outline-success px-4 me-md-2 fw-bold mr-2"%>
               </li>
               <li class="nav-item">
-                <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>
+                <%= link_to 'Register', new_user_registration_path, :class => "btn btn-outline-primary px-4 me-md-2 fw-bold" %>
               </li>
             <% end %>
           </ul>

@@ -1,6 +1,13 @@
 <div id="<%= dom_id comment %>">
-  <p>
+  <p class="p-2">
     <%= comment.cmnt %>
   </p>
-  <%=  button_to comment.likecs.count.to_s + ' Likes', post_comment_likecs_path(@post, comment), method: :post, :class => "btn btn-outline-dark btn-sm px-4 me-md-2 fw-bold sty mb-2" %>
+  <div class="col-auto d-none d-lg-block p-2">
+    <% if comment.images.attached? %>
+      <% comment.images.each do |image| %>
+        <img class="shadow mb-5 bg-white rounded mr-2" src="<%=(url_for(image))%> alt="" width="250">
+      <% end %>
+    <%end%>
+  </div>
+  <%=  button_to comment.likecs.count.to_s + ' Likes', post_comment_likecs_path(@post, comment), method: :post, :class => "btn btn-outline-dark btn-sm px-4 me-md-2 fw-bold mt-n5 sty mb-2 ml-2" %>
 </div>

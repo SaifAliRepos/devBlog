@@ -13,15 +13,15 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @currentUser = current_user.id
-    if(current_user.id==1)
+    if(current_user.id==3)
       @posts = Post.all
-    elsif(current_user.id==2)
-      @posts = Post.where('user_id=2')
+    else
+      @posts = Post.where(user_id: current_user.id)
     end
   end
 
   def index2
-    @posts= Post.all
+    @posts= Post.published_post
   end
   # GET /posts/1 or /posts/1.json
   def show
@@ -82,6 +82,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:name, :title, :status)
+      params.require(:post).permit(:name, :title, :status, :image)
     end
 end

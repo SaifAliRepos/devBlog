@@ -9,26 +9,27 @@
       </ul>
     </div>
   <% end %>
-  <%if post.status == 'pending' %>
-    <div class="container-fluid">
-      <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-5 d-flex flex-column position-static">
-          <p class="d-inline-block mb-2 ml-1 text-info">Exclusive</p>
-          <h3 class="mb-0 sty display-4"><%= post.name %></h3>
-          <div class="mb-1 text-muted"><%= post.created_at%></div>
-          <p class="card-text mb-auto"><%= post.title %></p>
-          <h4 class="mt-2">Status</h4>
-          <p class="card-text mb-2 mt-0"><%= post.status %></p>
-          <%= link_to 'Report', report_path, method: :post %>
-          <%= link_to "Show this post", post %>
-          <br/>
-          <%= post.likes.count.to_s %> <%= (post.likes.count) <= 1 ? 'Like' : 'Likes'%>
-          <%= post.comments.count.to_s %> <%= (post.comments.count) <= 1 ? 'Comment' : 'Comments'%>
-        </div>
-        <div class="col-auto d-none d-lg-block p-4">
-          <img class="rounded-lg-3" src="https://i.pinimg.com/originals/5f/8e/90/5f8e90b8b9c27c0e8b7aef48c432c5ce.jpg" alt="" width="520">
-        </div>
+  <div class="container-fluid">
+    <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-5 d-flex flex-column position-static mr-5">
+        <p class="d-inline-block mb-2 ml-1 text-info">Exclusive</p>
+        <h3 class="mb-0 sty display-4"><%= post.name %></h3>
+        <div class="mb-1 text-muted">Posted At: <%= post.created_at%></div>
+        <div class="mb-4 text-muted">By: <%= post.user.name%></div>
+        <p class="card-text"><%= post.title %></p>
+        <h4 class="mt-4">Status</h4>
+        <p class="card-text mb-2 mt-0"><%= post.status %></p>
+        <%= link_to 'Report', report_path, method: :post %>
+        <%= link_to "Show this post", post %>
+        <br/>
+        <%= post.likes.count.to_s %> <%= (post.likes.count) <= 1 ? 'Like' : 'Likes'%>
+        <%= post.comments.count.to_s %> <%= (post.comments.count) <= 1 ? 'Comment' : 'Comments'%>
+      </div>
+      <div class="col-auto d-none d-lg-block p-4 mr-5 pt-5">
+        <% if post.image.attached? %>
+          <img class="shadow mb-5 bg-white rounded" src="<%=(url_for(post.image))%> alt="" width="450">
+        <%end%>
       </div>
     </div>
   </div>
-<% end%>
+</div>
