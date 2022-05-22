@@ -1,0 +1,6 @@
+<div>
+  <%= link_to "Edit this post", edit_post_path(@post), :class => "btn btn-primary btn-sm px-4 me-md-2 fw-bold mt-n3 ml-2"  %>
+  <br/>
+  <%= link_to "Back to posts", posts_path, :class => "btn btn-info btn-sm px-4 me-md-2 fw-bold mb-3 mt-2   ml-2"  %>
+  <%= button_to "Destroy this post", @post, method: :delete, :class => "btn btn-danger btn-sm px-4 me-md-2 fw-bold ml-2"  %>
+</div>

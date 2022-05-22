@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 p-5">
+      <%= form_with(model: post) do |form| %>
+        <% if post.errors.any? %>
+          <div style="color: red">
+            <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+            <ul>
+              <% post.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="p-4">
+          <div class="sty mt-4">
+            <h3 class="sty display-4"><%= post.name %></h3>
+          </div>
+          <br/>
+          <%= form.radio_button :status, "pending" %>
+          <%= form.label :status, "Pending" %>
+          <br/>
+          <%= form.radio_button :status, "publish" %>
+          <%= form.label :status, "Publish" %>
+          <br/>
+          <%= form.radio_button :status, "unpublish" %>
+          <%= form.label :status, "UnPublish" %>
+          <div class="mt-4">
+            <%= form.submit%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <img class="rounded-lg-3" src="https://nasshop.vn/mscontent/uploads/2021/02/Consumer-Network-Attached-Storage-Nas-Market-Assessment-and-Key-Insights.gif" alt="" width="520">
+    </div>
+  </div>
+</div>

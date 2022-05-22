@@ -1,0 +1,10 @@
+<h1>Editing suggestion</h1>
+
+<%= render "form", suggestion: @suggestions %>
+
+<br>
+
+<div>
+  <%= link_to "Show this suggestion", [@post, @suggestion] %> |
+  <%= link_to "Back to suggestions", post_suggestions_path %>
+</div>

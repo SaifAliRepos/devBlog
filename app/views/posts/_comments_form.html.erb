@@ -1,0 +1,14 @@
+ <%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <p>
+    <%= form.label :Comment %><br>
+    <%= form.text_field :cmnt %>
+  </p>
+  <div>
+    <%= form.label :images, style: "display: block" %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+  <br/>
+  <p>
+    <%= form.submit 'Post', :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold"%>
+  </p>
+<% end %>

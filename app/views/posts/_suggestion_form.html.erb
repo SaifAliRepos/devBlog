@@ -1,0 +1,14 @@
+<%= form_with model: [ @post, @post.suggestions.build ] do |form| %>
+  <p>
+    <%= form.label :Find %><br>
+    <%= form.text_field :find %>
+  </p>
+  <p>
+    <%= form.label :Replace %><br>
+    <%= form.text_field :replace %>
+  </p>
+  <br/>
+  <p>
+    <%= form.submit 'Submit Suggestion', :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold"%>
+  </p>
+<% end %>
