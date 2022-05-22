@@ -69,7 +69,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem 'will_paginate', '~> 3.3'
+  gem 'will_paginate'
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
