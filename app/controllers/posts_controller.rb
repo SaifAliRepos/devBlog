@@ -1,5 +1,5 @@
-require 'will_paginate'
-require 'will_paginate/array'
+#require 'will_paginate'
+#require 'will_paginate/array'
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
