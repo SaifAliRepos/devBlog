@@ -1,7 +1,29 @@
-<%= link_to 'Create', new_post_path %>
-<br/>
-<%= link_to 'View Post', posts_path %>
-<br/>
-<%= link_to 'View All Post', postss_path %>
-<br/>
-<%= link_to 'Edit Profile', edit_user_registration_path %>
+<% if current_user.id == 3 %>
+  <%= link_to 'Open Admin Panel', rails_admin_path, :class => "btn btn-success btn-lg px-4 me-md-2 fw-bold mb-2 ml-2 mb-5"  %>
+  <h1 class="ml-n2 sty mb-4">Statistics</h1>
+  <p class="ml-2">Total Posts: <%= Post.all.count %></p>
+  <p class="ml-2">No of published Posts: <%= Post.all.and(Post.where(status: 'publish')).count %></p>
+  <p class="ml-2">No of pending Posts: <%= Post.all.and(Post.where(status: 'pending')).count %></p>
+  <p class="ml-2">No of Users: <%= User.all.count %></p>
+<%elsif current_user.id == 2%>
+  <%= link_to 'Approve Posts', postss_path, :class => "btn btn-success btn-lg px-4 me-md-2 fw-bold mb-2 ml-2 mb-5"  %>
+  <br/>
+  <%= link_to 'View Pending Posts', posts_path, :class => "btn btn-info btn-lg px-4 me-md-2 fw-bold mt-n3 ml-2 mb-5" %>
+  <h1 class="ml-n2 sty mb-4">Statistics</h1>
+  <p class="ml-2">Total Posts: <%= Post.all.count %></p>
+  <p class="ml-2">No of published Posts: <%= Post.all.and(Post.where(status: 'publish')).count %></p>
+  <p class="ml-2">No of pending Posts: <%= Post.all.and(Post.where(status: 'pending')).count %></p>
+  <p class="ml-2">No of Users: <%= User.all.count %></p>
+<% else %>
+  <%= link_to 'Create New Post', new_post_path, :class => "btn btn-light btn-lg px-4 me-md-2 fw-bold mb-2 ml-2 mb-5"  %>
+  <br/>
+  <%= link_to 'View Your Recent Posts', posts_path, :class => "btn btn-info btn-lg px-4 me-md-2 fw-bold mt-n3 ml-2 mb-5" %>
+  <br/>
+  <%= link_to 'View All Published Posts', postss_path, :class => "btn btn-success btn-lg px-4 me-md-2 fw-bold mt-n3 mb-5 ml-2" %>
+  <br/>
+  <%= link_to 'Edit Your Profile', edit_user_registration_path, :class => "btn btn-danger btn-lg px-4 me-md-2 fw-bold mt-n3 mb-5 ml-2" %>
+  <h1 class="ml-n2 sty mb-4">Statistics</h1>
+  <p class="ml-2">Total Posts: <%= Post.where(user_id: current_user.id).count %></p>
+  <p class="ml-2">No of published Posts: <%= Post.where(user_id: current_user.id).and(Post.where(status: 'publish')).count %></p>
+  <p class="ml-2">No of pending Posts: <%= Post.where(user_id: current_user.id).and(Post.where(status: 'pending')).count %></p>
+<% end %>

@@ -9,7 +9,7 @@
       </ul>
     </div>
   <% end %>
-  <div class="container-fluid">
+  <div class="container-fluid p-5 mb-n5 mt-n5">
     <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
       <div class="col p-5 d-flex flex-column position-static mr-5">
         <p class="d-inline-block mb-2 ml-1 text-info">Exclusive</p>
@@ -19,7 +19,7 @@
         <p class="card-text"><%= post.title %></p>
         <h4 class="mt-4">Status</h4>
         <p class="card-text mb-2 mt-0"><%= post.status %></p>
-        <%= link_to 'Report', report_path, method: :post %>
+        <%= link_to 'Report', report_path %>
         <%= link_to "Show this post", post %>
         <br/>
         <%= post.likes.count.to_s %> <%= (post.likes.count) <= 1 ? 'Like' : 'Likes'%>
@@ -28,6 +28,8 @@
       <div class="col-auto d-none d-lg-block p-4 mr-5 pt-5">
         <% if post.image.attached? %>
           <img class="shadow mb-5 bg-white rounded" src="<%=(url_for(post.image))%> alt="" width="450">
+        <% else %>
+          <img class="shadow mb-5 bg-white rounded" src="https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg" alt="" width="450">
         <%end%>
       </div>
     </div>

@@ -1,6 +1,12 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
 
+  def report
+    if user_signed_in?
+      @comment = Comment.find_by(params[:post_id]) # place custom id here and it will report
+      UserMailer.with(comment: @comment).report_comment.deliver_now
+    end
+  end
   # GET /comments or /comments.json
   def index
     @comments = Comment.all
@@ -19,6 +25,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
   end
 
   # POST /comments or /comments.json
@@ -40,6 +48,7 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
+
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to comment_url(@comment), notice: "Comment was successfully updated." }
@@ -53,10 +62,12 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: "Comment was successfully destroyed." }
+      format.html { redirect_to post_path(@post), notice: "Comment was successfully destroyed." }
       format.json { head :no_content }
     end
   end

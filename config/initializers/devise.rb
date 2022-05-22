@@ -268,7 +268,7 @@ Devise.setup do |config|
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :get
 
-  config.maximum_attempts = 3
+  config.maximum_attempts = 5
 
   config.unlock_in = 2.minutes
 

@@ -1,8 +1,17 @@
 <div class="container-fluid">
   <% name = current_user.present? ? current_user.email : 'Stranger' %>
   <% if user_signed_in? %>
-    <p>Welcome, <%= name %> </p>
-    <%= render 'shared/checks' %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 p-5">
+          <h1 class="sty display-5 mb-5">Welcome, <%= name %> </h1>
+          <%= render 'shared/checks' %>
+        </div>
+        <div class="col-md-6 p-5 mt-5">
+        <img class="rounded-lg-3" src="https://www.dink.eu/wp-content/uploads/2019/02/unnamed.gif" alt="" width="520">
+        </div>
+      </div>
+    </div>
   <% else %>
     <div class="container my-5">
       <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">

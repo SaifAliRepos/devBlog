@@ -77,3 +77,6 @@ group :test do
 end
 
 gem "devise", "~> 4.8"
+gem 'rails_admin', '~> 3.0.0.rc4'
+gem "sassc-rails"
+gem 'image_processing', '~> 1.2'

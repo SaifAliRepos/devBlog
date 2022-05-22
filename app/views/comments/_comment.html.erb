@@ -5,9 +5,17 @@
   <div class="col-auto d-none d-lg-block p-2">
     <% if comment.images.attached? %>
       <% comment.images.each do |image| %>
-        <img class="shadow mb-5 bg-white rounded mr-2" src="<%=(url_for(image))%> alt="" width="250">
+        <img class="shadow mb-5 bg-white rounded mr-2" src="<%=(url_for(image))%> alt="" width="220">
       <% end %>
     <%end%>
   </div>
-  <%=  button_to comment.likecs.count.to_s + ' Likes', post_comment_likecs_path(@post, comment), method: :post, :class => "btn btn-outline-dark btn-sm px-4 me-md-2 fw-bold mt-n5 sty mb-2 ml-2" %>
+  <div class="btn-group" role="group">
+    <%= button_to comment.likecs.count.to_s + ' Likes', post_comment_likecs_path(comment.post, comment), method: :post, :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
+    <%= button_to "Delete", [comment.post, comment], method: :delete, :class => "btn btn-danger btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
+    <%= button_to "Report", comment_report_path(comment), method: :post, :class => "btn btn-warning btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
+  </div>
+
+  <p>
+
+  </p>
 </div>
