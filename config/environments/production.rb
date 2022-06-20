@@ -66,6 +66,17 @@ Rails.application.configure do
   host = 'https://fierce-ravine-71442.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
 
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => 'saif.ali@devsinc.com',
+    :password             => 'rguowzovpcnnftvw',
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
