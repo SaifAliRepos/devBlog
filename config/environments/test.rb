@@ -36,6 +36,9 @@ Rails.application.configure do
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
 
+  host = 'https://fierce-ravine-71442.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
+
   config.action_mailer.perform_caching = false
 
   # Tell Action Mailer not to deliver emails to the real world.
