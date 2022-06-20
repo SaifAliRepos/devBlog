@@ -5,4 +5,3 @@ require_relative "application"
 Rails.application.initialize!
 #require "will_paginate"
 
-config.action_mailer.default_url_options = { :host => 'https://fierce-ravine-71442.herokuapp.com' }
