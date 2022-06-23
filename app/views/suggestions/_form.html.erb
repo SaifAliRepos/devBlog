@@ -1,8 +1,7 @@
-<%= form_for([@post, @suggestion]) do |form| %>
-  <% if @suggestion.errors.any? %>
+<%= form_with model: [ @post, @suggestion ] do |form| %>
+  <% if suggestion.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(suggestion.errors.count, "error") %> prohibited this suggestion from being saved:</h2>
-
+      <h2><%= pluralize(suggestion.errors.count, "error") %> prohibited this comment from being saved:</h2>
       <ul>
         <% suggestion.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,17 +9,18 @@
       </ul>
     </div>
   <% end %>
-
   <div>
     <%= form.label :find, style: "display: block" %>
     <%= form.text_field :find %>
   </div>
-
   <div>
     <%= form.label :replace, style: "display: block" %>
     <%= form.text_field :replace %>
   </div>
-
+  <div>
+    <%= form.hidden_field :post_id %>
+  </div>
+  <br/>
   <div>
     <%= form.submit %>
   </div>

@@ -6,9 +6,9 @@
   <% @suggestions.each do |suggestion| %>
     <%= render suggestion %>
     <p>
-      <%= link_to "Show this suggestion", suggestion %>
+      <%= link_to "Show this suggestion", @suggestion %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New suggestion", new_suggestion_path %>
+<%= link_to "New suggestion", new_post_suggestion_path %>

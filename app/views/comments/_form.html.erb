@@ -1,8 +1,7 @@
-<%= form_with(model: comment.post) do |form| %>
+<%= form_with model: [ @post, @comment ]  do |form| %>
   <% if comment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
       <ul>
         <% comment.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,15 +11,18 @@
   <% end %>
 
   <div>
-    <%= form.label :cmnt, style: "display: block" %>
+    <%= form.label :Comment, style: "display: block" %>
     <%= form.text_field :cmnt %>
   </div>
-
+  <br/>
   <div>
-    <%= form.label :images, style: "display: block" %>
+    <%= form.label :Images, style: "display: block" %>
     <%= form.file_field :images %>
   </div>
-
+  <div>
+    <%= form.hidden_field :post_id %>
+  </div>
+  <br/>
   <div>
     <%= form.submit %>
   </div>

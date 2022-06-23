@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_19_082804) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_21_073949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_082804) do
 
   create_table "comments", force: :cascade do |t|
     t.bigint "post_id"
-    t.string "cmnt"
+    t.string "cmnt", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_082804) do
 
   create_table "posts", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "name"
+    t.string "name", null: false
     t.string "title"
     t.string "status", default: "pending"
     t.datetime "created_at", null: false
@@ -81,17 +81,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_082804) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.string "reply", null: false
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
+  end
+
   create_table "suggestions", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "post_id"
-    t.string "find"
-    t.string "replace"
+    t.string "find", null: false
+    t.string "replace", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_suggestions_on_post_id"
+    t.index ["user_id"], name: "index_suggestions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", default: "", null: false
+    t.string "name", null: false
+    t.string "role", default: "user"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -120,5 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_082804) do
   add_foreign_key "likecs", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "replies", "comments"
   add_foreign_key "suggestions", "posts"
+  add_foreign_key "suggestions", "users"
 end

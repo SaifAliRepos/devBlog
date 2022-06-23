@@ -2,8 +2,9 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
 
   def report
+    @comment = Comment.find(params[:id])
     if user_signed_in?
-      @comment = Comment.find_by(params[:post_id]) # place custom id here and it will report
+      #@comment = Comment.find_by(params[:post_id]) # place custom id here and it will report
       UserMailer.with(comment: @comment).report_comment.deliver_now
     end
   end
@@ -25,8 +26,10 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
+    #@post = Post.find(params[:post_id])
+    #@comment = @post.comments.find(params[:id])
+    #@comment = Comment.find(params[:id])
+
   end
 
   # POST /comments or /comments.json
@@ -51,7 +54,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully updated." }
+        format.html { redirect_to post_path(@post), notice: "Comment was successfully updated." }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -75,11 +78,12 @@ class CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
+      #@post = Post.find(params[:post_id])
       @comment = Comment.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:cmnt, images: [])
+      params.require(:comment).permit(:cmnt, :post_id, images: [])
     end
 end

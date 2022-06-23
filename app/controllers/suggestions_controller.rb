@@ -1,13 +1,24 @@
 class SuggestionsController < ApplicationController
-  before_action :set_suggestion, only: %i[show update destroy]
-  before_action :set_post_suggestion_params, only: %i[update destroy]
+  before_action :set_suggestion, only: %i[approve show edit update destroy]
+  # before_action :set_post_suggestion_params, only: %i[update destroy]
   # GET /suggestions or /suggestions.json
+
+  def approve
+    # @post.update(title: @post.title.gsub("in", "is"))
+
+    #@post = Post.find_by(params[:post_id])
+    #@suggestion = Suggestion.find_by(params[:suggestion_id])
+    @post.update(title: @post.title.gsub(@suggestion.find.to_s, @suggestion.replace.to_s))
+    redirect_to post_path(@post)
+  end
+
   def index
     @suggestions = Suggestion.all
   end
 
   # GET /suggestions/1 or /suggestions/1.json
-  def show; end
+  def show
+  end
 
   # GET /suggestions/new
   def new
@@ -16,16 +27,15 @@ class SuggestionsController < ApplicationController
 
   # GET /suggestions/1/edit
   def edit
-    @post = Post.find(params[:post_id])
-    @suggestion = @post.suggestions.find_by(params[:suggestion_id])
+    #@suggestion = Suggestion.find(params[:id])
   end
 
   # POST /suggestions or /suggestions.json
   def create
     @post = Post.find(params[:post_id])
-    @suggestion = @post.suggestions.new(suggestion_params)
+    @suggestion = @post.suggestions.create(suggestion_params.merge(user_id: current_user.id))
 
-    @post.title.gsub('Third', '3')
+    # @post.title.gsub('Third', '3')
 
     respond_to do |format|
       if @suggestion.save
@@ -54,7 +64,8 @@ class SuggestionsController < ApplicationController
 
   # DELETE /suggestions/1 or /suggestions/1.json
   def destroy
-
+    @post = Post.find(params[:post_id])
+    @suggestion = @post.suggestions.find(params[:id])
     @suggestion.destroy
 
     respond_to do |format|
@@ -67,16 +78,12 @@ class SuggestionsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_suggestion
+    @post = Post.find(params[:post_id])
     @suggestion = Suggestion.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def suggestion_params
-    params.require(:suggestion).permit(:find, :replace)
-  end
-
-  def set_post_suggestion_params
-    @post = Post.find(params[:post_id])
-    @suggestion = @post.suggestions.find(params[:id])
+    params.require(:suggestion).permit(:post_id, :find, :replace)
   end
 end

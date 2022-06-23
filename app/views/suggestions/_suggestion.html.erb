@@ -1,15 +1,10 @@
 <div id="<%= dom_id suggestion %>">
   <p>
-    <%='Replace: ' + suggestion.find.to_s %>
+    <li><%='Replace: ' + suggestion.find.to_s + '  -> With : ' + suggestion.replace.to_s  %></li>
+    <small class="ml-4 text-secondary">Suggested By: <%= suggestion&.user&.name %></small>
   </p>
-
-  <p>
-    <%='With : ' + suggestion.replace.to_s %>
-  </p>
-
-  <%= button_to 'Approve', report_path, method: 'put' %>
-  <%= button_to "Destroy this suggestion", [suggestion.post, suggestion], method: :delete %>
-  <%= link_to "Edit this suggestion", edit_post_suggestion_path([suggestion.post, suggestion]) %>
-
-
+  <div class="btn-group" role="group">
+    <%= button_to "Discard", [suggestion.post, suggestion], method: :delete, :class => "btn btn-outline-dark btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3" %>
+    <%= link_to "Approve", post_suggestion_path(suggestion.post, suggestion),  :class => "btn btn-outline-success btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3"  %>
+  </div>
 </div>

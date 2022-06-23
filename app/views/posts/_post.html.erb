@@ -18,8 +18,12 @@
         <div class="mb-4 text-muted">By: <%= post.user.name%></div>
         <p class="card-text"><%= post.title %></p>
         <h4 class="mt-4">Status</h4>
-        <p class="card-text mb-2 mt-0"><%= post.status %></p>
-        <%= link_to 'Report', report_path %>
+        <% if post.status == 'publish' %>
+          <small class="text-success card-text mb-2 mt-0"><%= post.status.upcase %></small>
+        <% else %>
+          <small class="text-danger card-text mb-2 mt-0"><%= post.status.upcase %></small>
+        <% end %>
+        <%= link_to 'Report', post %>
         <%= link_to "Show this post", post %>
         <br/>
         <%= post.likes.count.to_s %> <%= (post.likes.count) <= 1 ? 'Like' : 'Likes'%>
@@ -27,7 +31,7 @@
       </div>
       <div class="col-auto d-none d-lg-block p-4 mr-5 pt-5">
         <% if post.image.attached? %>
-          <img class="shadow mb-5 bg-white rounded" src="<%=(url_for(post.image))%> alt="" width="450">
+          <img class="shadow mb-5 mt-3 bg-white rounded" src="<%=(url_for(post.image))%> alt="" width="450">
         <% else %>
           <img class="shadow mb-5 bg-white rounded" src="https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg" alt="" width="450">
         <%end%>

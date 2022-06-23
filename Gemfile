@@ -80,3 +80,5 @@ gem "devise", "~> 4.8"
 gem 'rails_admin', '~> 3.0.0.rc4'
 gem "sassc-rails"
 gem 'image_processing', '~> 1.2'
+gem 'byebug', '~> 9.0', '>= 9.0.6'
+gem 'cloudinary'

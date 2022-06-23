@@ -5,5 +5,8 @@ class Comment < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :likecs, dependent: :destroy
   has_many_attached :images, dependent: :destroy
+  #has_many :replies, as: :replyable
+  has_many :replies, dependent: :destroy
+
 
 end
