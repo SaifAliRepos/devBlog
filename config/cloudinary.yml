@@ -1,0 +1,18 @@
+development:
+  cloud_name: saifalidevsinc
+  api_key: '494812471993478'
+  api_secret: "6xyOI3GA9c65gH36jiua0L8nK64"
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: saifalidevsinc
+  api_key: '494812471993478'
+  api_secret: "6xyOI3GA9c65gH36jiua0L8nK64"
+  enhance_image_tag: true
+  static_file_support: false
+test:
+  cloud_name: saifalidevsinc
+  api_key: '494812471993478'
+  api_secret: "6xyOI3GA9c65gH36jiua0L8nK64"
+  enhance_image_tag: true
+  static_file_support: false

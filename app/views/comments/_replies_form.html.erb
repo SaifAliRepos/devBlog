@@ -1,0 +1,12 @@
+ <%= form_with model: [ @comment, @comment.replies.build ] do |form| %>
+  <p>
+    <%= form.label :reply %><br>
+    <%= form.text_field :reply %>
+  </p>
+  <br/>
+  <p>
+    <%= form.submit 'Reply', :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold"%>
+  </p>
+<% end %>
+
+
