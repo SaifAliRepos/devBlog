@@ -8,14 +8,14 @@
     <%= render @post %>
     <div class="btn-group mb-5" role="group">
       <%=  button_to @post.likes.count.to_s + ' Likes', post_likes_path(@post), method: :post, :class => "btn btn-outline-danger px-4 me-md-2 fw-bold ml-5 sty" %>
-      <%= button_to "Report", report_path, method: :post, :class => "btn btn-outline-warning px-4 me-md-2 fw-bold ml-2 sty" %>
+      <%= button_to "Report", post_report_path(@post), method: :post, :class => "btn btn-outline-warning px-4 me-md-2 fw-bold ml-2 sty" %>
     </div>
     <br/>
     <div class="ml-5">
       <%= render 'shared/security_checks'%>
     </div>
     <br/>
-    <div class = "ml-5">
+    <div class = "ml-5 mt-3">
       <h3><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chat-right-text mr-2" viewBox="0 0 16 16">
           <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
           <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
@@ -24,9 +24,8 @@
         <%= render @post.comments %>
         <%= render 'comments_form'%>
         <br/>
-        <h3><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chat-right-text mr-2" viewBox="0 0 16 16">
-            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
-            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+        <h3><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class=" mr-2 bi bi-lightbulb" viewBox="0 0 16 16">
+            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
           </svg>Suggestions!</h3>
         <%= render @post.suggestions%>
         <%= render 'suggestion_form'%>

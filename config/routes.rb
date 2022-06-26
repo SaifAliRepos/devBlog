@@ -1,36 +1,37 @@
 Rails.application.routes.draw do
-  resources :replies
 
   authenticate :user, ->(u) { u.role == 'admin' } do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   end
-  # resources :suggestions
-  # resources :comments
-  # resources :posts
+
   resources :posts do
+    post '/report/:id', to: 'posts#report', as: 'report'
     resources :comments do
+      post '/creport/:id', to: 'comments#report', as: 'comment-report'
       resources :likecs
-      #resources :replies, module: :comments
     end
     resources :suggestions do
       put '/approve/:id', to: 'suggestions#approve', as: 'approve'
-      #put '/approve/:id', to: 'posts#approve', as: 'approve'
-      #resources :replies, module: :suggestions
     end
     resources :likes
   end
 
+  #resources :comments do
+  #  resources :replies
+  #end
+
   resources :comments do
-    resources :replies
+    resources :replies, module: :comments
+  end
+
+  resources :suggestions do
+    resources :replies, module: :suggestions
   end
 
 
   devise_for :users
 
   get '/postss', to: 'posts#index2'
-  post '/report/:id', to: 'posts#report', as: 'report'
-  post '/creport/:id', to: 'comments#report', as: 'comment-report'
-  put '/approve/:id', to: 'suggestions#approve', as: 'approve'
 
   get 'home/index'
   root to: 'home#index'

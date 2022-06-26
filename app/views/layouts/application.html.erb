@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LoginApp</title>
+    <title>D E V B L O G </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,8 +16,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    <%= favicon_link_tag asset_path('favicon.svg') %>
   </head>
-  <body>
+  <body class= "d-flex flex-column min-vh-100">
     <%= render 'shared/navbar' %>
     <%= yield %>
     <%= render 'shared/footer' %>
