@@ -1,10 +1,10 @@
 <div id="<%= dom_id suggestion %>">
   <p>
     <li><%='Replace: ' + suggestion.find.to_s + '  -> With: ' + suggestion.replace.to_s  %></li>
-    <small class="ml-4 text-secondary">Suggested By: <%= suggestion&.user&.name %></small>
+    <small class="ml-4 text-secondary">Suggested By: <%= suggestion&.user&.name %> on post <%= suggestion&.post.id %> </small>
   </p>
   <div class="btn-group" role="group">
-    <%if eligible_user(@post, current_user) %>
+    <%if eligible_user(suggestion.post) %>
       <%= button_to "Discard", [suggestion.post, suggestion], method: :delete, :class => "btn btn-outline-dark btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3" %>
       <%= link_to "Approve", post_suggestion_path(suggestion.post, suggestion),  :class => "btn btn-outline-success btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3"  %>
     <% else %>

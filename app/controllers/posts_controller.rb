@@ -12,14 +12,13 @@ class PostsController < ApplicationController
 
     @post.update(title: @post.title.gsub(@suggestion.find.to_s, @suggestion.replace.to_s))
 
-    #@post.update(title: @post.title.gsub("Lore", "Lorem"))
-    #Post.find(3).update(title.gsub('Third', '3'))
+
     redirect_to post_path(@post)
   end
 
   def report
     if user_signed_in?
-      # @post = Post.find(1) # place custom id here and it will report
+
       UserMailer.with(post: @post).report_email.deliver_now
     end
   end

@@ -6,8 +6,7 @@ class SuggestionsController < ApplicationController
   def approve
     # @post.update(title: @post.title.gsub("in", "is"))
 
-    #@post = Post.find_by(params[:post_id])
-    #@suggestion = Suggestion.find_by(params[:suggestion_id])
+
     @post.update(title: @post.title.gsub(@suggestion.find.to_s, @suggestion.replace.to_s))
     redirect_to post_path(@post)
   end
@@ -84,6 +83,6 @@ class SuggestionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def suggestion_params
-    params.require(:suggestion).permit(:post_id, :find, :replace)
+    params.require(:suggestion).permit(:user_id, :post_id, :find, :replace)
   end
 end

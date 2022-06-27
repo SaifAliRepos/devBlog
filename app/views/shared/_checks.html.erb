@@ -29,4 +29,6 @@
   <p class="ml-2">No of published Posts: <%= Post.where(user_id: current_user.id).and(Post.where(status: 'publish')).count %></p>
   <p class="ml-2">No of pending Posts: <%= Post.where(user_id: current_user.id).and(Post.where(status: 'pending')).count %></p>
   <p class="ml-2">No of Suggestions Submiited: <%= Suggestion.where(user_id: current_user.id).count %></p>
+  <h4 class="ml-n2 mb-4 mt-4">My submitted suggestions</h4>
+  <%= render Suggestion.where(user_id: current_user.id) %>
 <% end %>

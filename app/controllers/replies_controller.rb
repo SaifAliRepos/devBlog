@@ -29,7 +29,7 @@ class RepliesController < ApplicationController
 
     respond_to do |format|
       if @reply.save
-        format.html { redirect_to comment_url(@comment), notice: "Reply was successfully created." }
+        format.html { redirect_to post_comment_path(@comment.post,@comment), notice: "Reply was successfully created." }
         format.json { render :show, status: :created, location: @reply }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -69,7 +69,7 @@ class RepliesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reply_params
-      #params.require(:reply).permit(:replyable_id, :replyable_type, :content)
+
       params.require(:reply).permit(:reply)
     end
 end
