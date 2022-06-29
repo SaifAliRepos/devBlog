@@ -12,6 +12,11 @@ class Post < ApplicationRecord
   scope :unpublish_post, -> { where(status: 'unpublish') }
   scope :not_publish_post, -> { where.not(status: 'publish') }
 
-  enum status: [:pending, :publish, :unpublish]
+  enum status:
+  {
+    pending: 'pending',
+    publish: 'publish',
+    unpublish: 'unpublish'
+  }
 
 end
