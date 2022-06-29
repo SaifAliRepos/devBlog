@@ -50,17 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_073949) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
-  create_table "likecs", force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
-    t.bigint "comment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_likecs_on_comment_id"
-    t.index ["post_id"], name: "index_likecs_on_post_id"
-    t.index ["user_id"], name: "index_likecs_on_user_id"
-  end
-
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "likeable_type", null: false
@@ -75,18 +64,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_073949) do
     t.bigint "user_id"
     t.string "name", null: false
     t.string "title"
-    t.string "status", default: "pending"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "replies", force: :cascade do |t|
+    t.string "replyable_type"
+    t.bigint "replyable_id"
     t.string "reply", null: false
-    t.bigint "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_replies_on_comment_id"
+    t.index ["replyable_type", "replyable_id"], name: "index_replies_on_replyable"
   end
 
   create_table "suggestions", force: :cascade do |t|
@@ -126,12 +116,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_073949) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
-  add_foreign_key "likecs", "comments"
-  add_foreign_key "likecs", "posts"
-  add_foreign_key "likecs", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "replies", "comments"
   add_foreign_key "suggestions", "posts"
   add_foreign_key "suggestions", "users"
 end

@@ -1,11 +1,11 @@
 <%= form_with model: [ @post, @post.suggestions.build ] do |form| %>
   <p>
     <%= form.label :Find %><br>
-    <%= form.text_field :find %>
+    <%= form.text_field :find, required: true %>
   </p>
   <p>
     <%= form.label :Replace %><br>
-    <%= form.text_field :replace %>
+    <%= form.text_field :replace, required: true %>
   </p>
   <br/>
   <p>

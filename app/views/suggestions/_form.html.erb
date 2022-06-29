@@ -11,11 +11,11 @@
   <% end %>
   <div>
     <%= form.label :find, style: "display: block" %>
-    <%= form.text_field :find %>
+    <%= form.text_field :find, required: true %>
   </div>
   <div>
     <%= form.label :replace, style: "display: block" %>
-    <%= form.text_field :replace %>
+    <%= form.text_field :replace, required: true %>
   </div>
   <div>
     <%= form.hidden_field :post_id %>

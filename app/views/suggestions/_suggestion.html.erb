@@ -5,8 +5,10 @@
   </p>
   <div class="btn-group" role="group">
     <%if eligible_user(suggestion.post) %>
+      <%= link_to suggestion.replies.count.to_s +  " Replies", post_suggestion_path(suggestion.post, suggestion),  :class => "btn btn-outline-primary btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3"  %>
+      <%= link_to "View", post_suggestion_path(suggestion.post, suggestion),  :class => "btn btn-outline-success btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3"  %>
       <%= button_to "Discard", [suggestion.post, suggestion], method: :delete, :class => "btn btn-outline-dark btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3" %>
-      <%= link_to "Approve", post_suggestion_path(suggestion.post, suggestion),  :class => "btn btn-outline-success btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3"  %>
+
     <% else %>
       <%= button_to "Discard", [suggestion.post, suggestion], method: :delete, :class => "btn btn-outline-dark btn-sm px-4 me-md-2 fw-bold sty mt-2 ml-2 mb-3" %>
     <% end %>

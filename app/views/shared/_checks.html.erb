@@ -7,7 +7,7 @@
   <p class="ml-2">No of Users: <%= User.all.count %></p>
   <p class="ml-2">No of Suggestions Submiited: <%= Suggestion.where(user_id: current_user.id).count %></p>
 <%elsif current_user.id == 2%>
-  <%= link_to 'Unpublish Posts', postss_path, :class => "btn btn-success btn-lg px-4 me-md-2 fw-bold mb-2 ml-2 mb-5"  %>
+  <%= link_to 'Unpublish Posts', publish_posts_path, :class => "btn btn-success btn-lg px-4 me-md-2 fw-bold mb-2 ml-2 mb-5"  %>
   <br/>
   <%= link_to 'Approve/Delete Posts', posts_path, :class => "btn btn-info btn-lg px-4 me-md-2 fw-bold mt-n3 ml-2 mb-5" %>
   <h1 class="ml-n2 sty mb-4">Statistics</h1>
@@ -21,7 +21,7 @@
   <br/>
   <%= link_to 'View Your Recent Posts', posts_path, :class => "btn btn-info btn-lg px-4 me-md-2 fw-bold mt-n3 ml-2 mb-5" %>
   <br/>
-  <%= link_to 'View All Published Posts', postss_path, :class => "btn btn-success btn-lg px-4 me-md-2 fw-bold mt-n3 mb-5 ml-2" %>
+  <%= link_to 'View All Published Posts', publish_posts_path, :class => "btn btn-success btn-lg px-4 me-md-2 fw-bold mt-n3 mb-5 ml-2" %>
   <br/>
   <%= link_to 'Edit Your Profile', edit_user_registration_path, :class => "btn btn-danger btn-lg px-4 me-md-2 fw-bold mt-n3 mb-5 ml-2" %>
   <h1 class="ml-n2 sty mb-4">Statistics</h1>

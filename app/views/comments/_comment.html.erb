@@ -11,12 +11,12 @@
   </div>
   <div class="btn-group mb-2" role="group">
     <%if eligible_user(comment.post) %>
-      <%= button_to comment.likecs.count.to_s + ' Likes', post_comment_likecs_path(comment.post, comment), method: :post, :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
+      <%= button_to comment.likes.count.to_s + ' Likes', post_comment_likes_path(comment.post, comment), method: :post, :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
       <%= link_to comment.replies.count.to_s +  " Replies", post_comment_path(comment.post, comment), :class => "btn btn-primary btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
       <%= button_to "Delete", [comment.post, comment], method: :delete, :class => "btn btn-danger btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
       <%= button_to "Report", post_comment_path(comment.post, comment), method: :get, :class => "btn btn-warning btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
     <% else %>
-      <%= button_to comment.likecs.count.to_s + ' Likes', post_comment_likecs_path(comment.post, comment), method: :post, :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
+      <%= button_to comment.likes.count.to_s + ' Likes', post_comment_likes_path(comment.post, comment), method: :post, :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
       <%= link_to comment.replies.count.to_s +  " Replies", post_comment_path(comment.post, comment), :class => "btn btn-primary btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
       <%= button_to "Report", post_comment_path(comment.post, comment), method: :get, :class => "btn btn-warning btn-sm px-4 me-md-2 fw-bold mt-n3 sty mb-2 ml-2" %>
     <% end %>

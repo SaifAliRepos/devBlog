@@ -1,12 +1,10 @@
- <%= form_with model: [@comment.post, @comment, @comment.replies.build ], local: true do |form| %>
+ <%= form_with model: [@suggestion.post, @suggestion, @suggestion.replies.build ], local: true do |form| %>
   <p>
     <%= form.label :reply %><br>
-    <%= form.text_field :reply, required: true %>
+    <%= form.text_field :reply %>
   </p>
   <br/>
   <p>
     <%= form.submit 'Reply', :class => "btn btn-dark btn-sm px-4 me-md-2 fw-bold"%>
   </p>
 <% end %>
-
-

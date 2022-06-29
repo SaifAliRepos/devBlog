@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
+# comment
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[report show edit update destroy]
+  before_action :set_post, only: %i[create]
 
   def report
     @comment = Comment.find(params[:id])
-    if user_signed_in?
-      # @comment = Comment.find_by(params[:post_id]) # place custom id here and it will report
-      UserMailer.with(comment: @comment).report_comment.deliver_now
-    end
+    return unless user_signed_in?
+
+    UserMailer.with(comment: @comment).report_comment.deliver_now
   end
 
   # GET /comments or /comments.json
@@ -15,13 +18,10 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/1 or /comments/1.json
-  def show
-
-  end
+  def show; end
 
   # GET /comments/new
   def new
-
     @comment = Comment.new
   end
 
@@ -32,8 +32,6 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comment_params)
 
     respond_to do |format|
@@ -49,10 +47,9 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
-
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to post_path(@post), notice: "Comment was successfully updated." }
+        format.html { redirect_to post_path(@post), notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,7 +60,6 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.destroy
 

@@ -14,7 +14,7 @@
       <div class="col p-5 d-flex flex-column position-static mr-5">
         <p class="d-inline-block mb-2 ml-1 text-info">Exclusive</p>
         <h3 class="mb-0 sty display-4"><%= post.name %></h3>
-        <div class="mb-1 text-muted">Posted At: <%= post.created_at%></div>
+        <div class="mb-1 text-muted">Posted At: <%= time_ago_in_words(post.created_at).capitalize%> ago</div>
         <div class="mb-4 text-muted">By: <%= post.user.name%></div>
         <p class="card-text"><%= post.title %></p>
         <h4 class="mt-4">Status</h4>

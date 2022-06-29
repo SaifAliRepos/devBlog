@@ -1,6 +1,6 @@
 <div class="contaner">
-  <div class="text-left ml-5">
-    <p style="color: green"><%= notice %></p>
+  <div class="text-left ml-5 mt-3">
+
     <%= render @comment %>
     <div>
       <p class="ml-2 mt-2">Are you sure you want to report it!</p>
@@ -13,7 +13,7 @@
           <path d="M5.232 4.293a.5.5 0 0 0-.7-.106L.54 7.127a1.147 1.147 0 0 0 0 1.946l3.994 2.94a.5.5 0 1 0 .593-.805L1.114 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.5.5 0 0 0 .042-.028l4.012-2.954a.5.5 0 0 0 .106-.699z"/>
         </svg>Replies!</h3>
       <%= render @comment.replies %>
-      <%= render 'replies_form' %>
+      <%= render 'replies_form', locals: {replyable: @comment} %>
     </div>
   </div>
 </div>

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# mailer
 class UserMailer < ApplicationMailer
   default from: 'notifications@example.com'
 
@@ -9,8 +12,7 @@ class UserMailer < ApplicationMailer
 
   def report_comment
     @comment = params[:comment]
-    @url  = 'http://example.com/login'
+    @url = 'http://example.com/login'
     mail(to: 'saif.ali@devsinc.com', subject: 'This Comment is reported!')
   end
-
 end

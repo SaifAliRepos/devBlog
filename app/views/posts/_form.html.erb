@@ -14,12 +14,12 @@
         <% end %>
         <div class="mb-4">
           <%= form.label :'Post Name', style: "display: block" %>
-          <%= form.text_field :name %>
+          <%= form.text_field :name, required: true %>
         </div>
 
         <div>
           <%= form.label :'Write Something ', style: "display: block" %>
-          <%= form.text_area :title %>
+          <%= form.text_area :title, required: true %>
         </div>
         <div>
           <%= form.hidden_field :status %>

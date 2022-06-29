@@ -1,45 +1,47 @@
-require "application_system_test_case"
+# frozen_string_literal: true
+
+require 'application_system_test_case'
 
 class RepliesTest < ApplicationSystemTestCase
   setup do
     @reply = replies(:one)
   end
 
-  test "visiting the index" do
+  test 'visiting the index' do
     visit replies_url
-    assert_selector "h1", text: "Replies"
+    assert_selector 'h1', text: 'Replies'
   end
 
-  test "should create reply" do
+  test 'should create reply' do
     visit replies_url
-    click_on "New reply"
+    click_on 'New reply'
 
-    fill_in "Content", with: @reply.content
-    fill_in "Replyable", with: @reply.replyable_id
-    fill_in "Replyable type", with: @reply.replyable_type
-    click_on "Create Reply"
+    fill_in 'Content', with: @reply.content
+    fill_in 'Replyable', with: @reply.replyable_id
+    fill_in 'Replyable type', with: @reply.replyable_type
+    click_on 'Create Reply'
 
-    assert_text "Reply was successfully created"
-    click_on "Back"
+    assert_text 'Reply was successfully created'
+    click_on 'Back'
   end
 
-  test "should update Reply" do
+  test 'should update Reply' do
     visit reply_url(@reply)
-    click_on "Edit this reply", match: :first
+    click_on 'Edit this reply', match: :first
 
-    fill_in "Content", with: @reply.content
-    fill_in "Replyable", with: @reply.replyable_id
-    fill_in "Replyable type", with: @reply.replyable_type
-    click_on "Update Reply"
+    fill_in 'Content', with: @reply.content
+    fill_in 'Replyable', with: @reply.replyable_id
+    fill_in 'Replyable type', with: @reply.replyable_type
+    click_on 'Update Reply'
 
-    assert_text "Reply was successfully updated"
-    click_on "Back"
+    assert_text 'Reply was successfully updated'
+    click_on 'Back'
   end
 
-  test "should destroy Reply" do
+  test 'should destroy Reply' do
     visit reply_url(@reply)
-    click_on "Destroy this reply", match: :first
+    click_on 'Destroy this reply', match: :first
 
-    assert_text "Reply was successfully destroyed"
+    assert_text 'Reply was successfully destroyed'
   end
 end

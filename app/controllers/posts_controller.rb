@@ -1,35 +1,32 @@
+# frozen_string_literal: true
+
 # require 'will_paginate'
 # require 'will_paginate/array'
+
+# posts
 class PostsController < ApplicationController
-  #skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   before_action :set_post, only: %i[approve report show edit update destroy]
   before_action :set_suggestion, only: %i[approve]
 
-
   def approve
-
-    #@post.update(title: @post.title.gsub("in", "is"))
-
     @post.update(title: @post.title.gsub(@suggestion.find.to_s, @suggestion.replace.to_s))
-
 
     redirect_to post_path(@post)
   end
 
   def report
-    if user_signed_in?
-
-      UserMailer.with(post: @post).report_email.deliver_now
-    end
+    UserMailer.with(post: @post).report_email.deliver_now if user_signed_in?
   end
 
   # GET /posts or /posts.json
   def index
-    @currentUser = current_user.id
-    @posts = if (current_user.role == 'admin' || current_user.role == 'moderator')
-               Post.all.order(created_at: :desc)
+
+
+    @posts = if current_user.id == 1 || current_user.id == 2
+               Post.not_publish_post.order(created_at: :desc)
              else
-               Post.where(user_id: current_user.id).order(created_at: :desc)
+               Post.not_publish_post.where(user_id: current_user).order(created_at: :desc)
              end
   end
 
@@ -39,7 +36,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    # @post = Post.find(params[:id])
+    authorize @post
     # @suggestion = @post.suggestions.build
   end
 
@@ -54,14 +51,11 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params.merge(user_id: current_user.id))
-
     respond_to do |format|
       if @post.save
         format.html { redirect_to post_url(@post), notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,6 +83,8 @@ class PostsController < ApplicationController
     end
   end
 
+  def error; end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -99,7 +95,7 @@ class PostsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:name, :title, :status, :image)
-    #params.permit(:post_id, :title)
+    # params.permit(:post_id, :title)
   end
 
   def p_params
