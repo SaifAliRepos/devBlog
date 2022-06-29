@@ -2,10 +2,8 @@
 
 class User < ApplicationRecord
   validates :name, presence: true
-
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :likecs, dependent: :destroy
   has_many :suggestions, dependent: :destroy
 
   scope :admin_user, -> { where(role: 'admin') }
