@@ -17,13 +17,13 @@
             <h3 class="sty display-4"><%= post.name %></h3>
           </div>
           <br/>
-          <%= form.radio_button :status, , value: 'pending'  %>
+          <%= form.radio_button :status, value: 'pending'  %>
           <%= form.label :status, "Pending" %>
           <br/>
-          <%= form.radio_button :status, , value: 'publish'  %>
+          <%= form.radio_button :status, value: 'publish'  %>
           <%= form.label :status, "Publish" %>
           <br/>
-          <%= form.radio_button :status, , value: 'unpublish'  %>
+          <%= form.radio_button :status, value: 'unpublish'  %>
           <%= form.label :status, "UnPublish" %>
           <div class="mt-4">
             <%= form.submit%>
