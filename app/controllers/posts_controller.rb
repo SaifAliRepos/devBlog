@@ -16,14 +16,14 @@ class PostsController < ApplicationController
   end
 
   def report
+    return unless user_signed_in?
+
     UserMailer.with(post: @post).report_email.deliver_now if user_signed_in?
   end
 
   # GET /posts or /posts.json
   def index
-
-
-    @posts = if current_user.id == 1 || current_user.id == 2
+    @posts = if current_user.role == 'admin' || current_user.role == 'moderator'
                Post.not_publish_post.order(created_at: :desc)
              else
                Post.not_publish_post.where(user_id: current_user).order(created_at: :desc)

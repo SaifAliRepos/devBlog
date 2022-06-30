@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# for show page
+# for dashboard page
 class HomeController < ApplicationController
   def index
     @posts = Post.all

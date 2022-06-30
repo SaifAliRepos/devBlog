@@ -11,14 +11,11 @@ class LikesController < ApplicationController
   def create
     @likeable = find_likeable
     @like = @likeable.likes.create(user_id: current_user.id)
-
     respond_to do |format|
       if @like.save
         format.html { redirect_to post_path(@post), notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
       else
         format.html { redirect_to post_path(@post), status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end

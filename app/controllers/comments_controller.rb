@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   before_action :set_post, only: %i[create]
 
   def report
-    @comment = Comment.find(params[:id])
+    # @comment = Comment.find(params[:id])
     return unless user_signed_in?
 
     UserMailer.with(comment: @comment).report_comment.deliver_now

@@ -1,6 +1,4 @@
 <div class="p-5">
-
-  <p style="color: green"><%= notice %></p>
   <%= render @suggestion %>
   <div>
     <%= button_to 'Approve Suggestion', post_suggestion_approve_path(@post, @suggestion), method: 'put',  :class => "btn btn-success btn-sm px-4 me-md-2 fw-bold sty ml-2 mb-3" %>

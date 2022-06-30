@@ -2,7 +2,6 @@
 
 # post
 class PostPolicy < ApplicationPolicy
-
   def index; end
 
   def create?; end
