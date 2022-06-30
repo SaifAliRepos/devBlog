@@ -2,9 +2,11 @@
 
 # suggestions
 class SuggestionsController < ApplicationController
-  before_action :set_suggestion, only: %i[approve show edit update destroy]
+  before_action :set_suggestion, only: %i[show edit update destroy]
 
   def approve
+    @post = Post.find(params[:post_id])
+    @suggestion = Suggestion.find(params[:suggestion_id])
     @post.update(title: @post.title.gsub(@suggestion.find.to_s, @suggestion.replace.to_s))
     authorize @post
     respond_to do |format|
