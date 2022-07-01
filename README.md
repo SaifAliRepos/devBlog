@@ -24,27 +24,27 @@ For now it cab be taken as a light instagram but in future we will ehance its fu
 
 * Following are system dependencies
 
-Rails 5.2.3 or higher
-ruby 2.7.0
-pg = 1.1
+  1. Rails 5.2.3 or higher
+  2. ruby 2.7.0
+  3. pg = 1.1
 
 * Services
 
-Action Mailer
+  1. Action Mailer
 
-Cloudinary
+  2. Cloudinary
 
-Postgress
+  3. Postgress
 
 * Gems
 
-gem 'byebug', '~> 9.0', '>= 9.0.6'
-gem 'cloudinary'
-gem 'devise', '~> 4.8'
-gem 'image_processing', '~> 1.2'
-gem 'pundit'
-gem 'rails_admin', '~> 3.0.0.rc4'
-gem 'sassc-rails'
+  1. gem 'byebug', '~> 9.0', '>= 9.0.6'
+  2. gem 'cloudinary'
+  3. gem 'devise', '~> 4.8'
+  4. gem 'image_processing', '~> 1.2'
+  5. gem 'pundit'
+  6. gem 'rails_admin', '~> 3.0.0.rc4'
+  7. gem 'sassc-rails'
 
 * How to install and run: Clone this repo and run bundle install to setup all gems after that setup your account on cloudinary. In clude your secret keys, api etc in cloudinary.yml file once its up you can run rake db:migrate to create tables and then rake db:seed for seeding the default values. After that run your local server and post the blogs!
 
