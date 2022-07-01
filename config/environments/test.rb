@@ -2,6 +2,7 @@
 
 require 'active_support/core_ext/integer/time'
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   config.cache_classes = true
   config.eager_load = ENV['CI'].present?
@@ -32,3 +33,4 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation = :raise
   config.active_support.disallowed_deprecation_warnings = []
 end
+# rubocop:enable Metrics/BlockLength

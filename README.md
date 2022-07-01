@@ -12,12 +12,41 @@ For now it cab be taken as a light instagram but in future we will ehance its fu
 
 * User roles: Admins, Moderators and Users
 
+* Admin have all the rights except publishing or unpublishing post
+
+* Moderator can publish or unpublish post and can delete it as well
+
+* Registered user can post, comment, like, report and reply on published post.
+
+* Unregistered user can only view published posts on home page of app.
+
 * Sections in app: Home Section, Authorized User Section, Moderator Section, Admin Section
 
-* How to install and run: App is deployed on heorku server you just need to visit the
+* Following are system dependencies
 
-* How to use: Seed file has been populated with one user of each roles, as repo is shared to only trusted individuals. So you can access the file for knowing credentials to login. For administration only* For public they need to sign up first and should verify credentials via mail then they would be able create posts and more.
+Rails 5.2.3 or higher
+ruby 2.7.0
+pg = 1.1
+
+* Services
+
+Action Mailer
+
+Cloudinary
+
+Postgress
+
+* Gems
+
+gem 'byebug', '~> 9.0', '>= 9.0.6'
+gem 'cloudinary'
+gem 'devise', '~> 4.8'
+gem 'image_processing', '~> 1.2'
+gem 'pundit'
+gem 'rails_admin', '~> 3.0.0.rc4'
+gem 'sassc-rails'
+
+* How to install and run: Clone this repo and run bundle install to setup all gems after that setup your account on cloudinary. In clude your secret keys, api etc in cloudinary.yml file once its up you can run rake db:migrate to create tables and then rake db:seed for seeding the default values. After that run your local server and post the blogs!
+
 
 * Credits: I want to thank google, stackoverflow and every single indivdual to guide me to acheive this objective.
-
-

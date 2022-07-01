@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get '/publish_posts', to: 'posts#index2'
+  get '/publish_posts', to: 'posts#dashboard'
   get '/not_found', to: 'posts#error'
 
   get 'home/index'

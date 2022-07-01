@@ -17,7 +17,7 @@ User.create!(name: 'Moderator', role: 'moderator', email: 'moderator@gmail.com',
 User.create!(name: 'User1', role: 'user', email: 'user@gmail.com', password: '123456', password_confirmation: '123456',
              confirmed_at: Time.now)
 
-puts "Users Created"
+puts 'Users Created'
 
 Post.create(user_id: 1, name: 'First Post', title: 'Default post by admin', status: 'pending')
 

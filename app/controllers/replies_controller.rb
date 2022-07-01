@@ -4,23 +4,18 @@
 class RepliesController < ApplicationController
   before_action :set_reply, only: %i[show edit update destroy]
 
-  # GET /replies or /replies.json
   def index
     @replies = Reply.all
   end
 
-  # GET /replies/1 or /replies/1.json
   def show; end
 
-  # GET /replies/new
   def new
     @reply = @replyable.replies.new
   end
 
-  # GET /replies/1/edit
   def edit; end
 
-  # POST /replies or /replies.json
   def create
     @replyable = find_replyable
     @reply = @replyable.replies.new reply_params
@@ -42,7 +37,6 @@ class RepliesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /replies/1 or /replies/1.json
   def update
     respond_to do |format|
       if @reply.update(reply_params)
@@ -55,7 +49,6 @@ class RepliesController < ApplicationController
     end
   end
 
-  # DELETE /replies/1 or /replies/1.json
   def destroy
     @reply.destroy
 
@@ -67,12 +60,10 @@ class RepliesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_reply
     @reply = Reply.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def reply_params
     params.require(:reply).permit(:reply)
   end

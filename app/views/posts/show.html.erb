@@ -7,7 +7,7 @@
   <%elsif%>
     <%= render @post %>
     <div class="btn-group mb-4" role="group">
-      <%=  button_to @post.likes.count.to_s + ' Likes', post_likes_path(@post), method: :post, :class => "btn btn-outline-danger px-4 me-md-2 fw-bold ml-5 sty" %>
+      <%=  button_to @post.likes.count.to_s + ' Likes', post_likes_path(@post), method: :post, :class => "btn btn-outline-danger px-4 me-md-2 fw-bold ml-5 sty", remote: true %>
       <%= button_to "Report", post_report_path(@post), method: :post, :class => "btn btn-outline-warning px-4 me-md-2 fw-bold ml-2 sty" %>
     </div>
     <br/>
