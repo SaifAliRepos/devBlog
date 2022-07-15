@@ -192,8 +192,8 @@ RSpec.describe PostsController, type: :controller do
     context 'when post id is valid' do
       let(:post) { FactoryBot.create :post }
       it 'is expected to report ' do
-        UserMailer.report_email(post)
-        expect(ActionMailer::Base.deliveries.count).to eq(0)
+        UserMailer.with(post).report_email.deliver_now
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
       end
     end
   end
