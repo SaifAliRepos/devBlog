@@ -9,7 +9,6 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-
   describe 'GET #index' do
     before do
       get :index
@@ -21,14 +20,12 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-
-
   describe 'GET #new' do
     before do
       get :new
     end
 
-    it 'is expected to assign user as new instance variable' do
+    it 'is expected to assign post as new instance variable' do
       expect(assigns[:post]).to be_instance_of(Post)
     end
 
@@ -51,7 +48,40 @@ RSpec.describe PostsController, type: :controller do
       let(:post) { FactoryBot.create :post }
       let(:params) { { id: post.id, user_id: post.user_id } }
 
-      it 'is expected to set post instance variable' do
+      it 'is expected to set suggestion instance variable' do
+        expect(assigns[:post]).to eq(Post.find_by(id: params[:id]))
+      end
+
+      it 'is expected to set user instance variable' do
+        expect(assigns[:post]).to eq(Post.find_by(user_id: params[:user_id]))
+      end
+
+      it 'is expected to redirect to posts path' do
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context 'when params are not correct' do
+      let(:post) { FactoryBot.create :post }
+      let(:params) { { id: post.id, user_id: post.user_id, name: '' } }
+
+      it 'is expected to name render :edit' do
+        is_expected.to render_template(:edit)
+      end
+    end
+  end
+
+  describe 'GET #edit' do
+    before do
+      # something that you want to execute before running `it` block
+      get :edit, params: params
+    end
+
+    context 'when post id is valid' do
+      let(:post) { FactoryBot.create :post }
+      let(:params) { { id: post.id, user_id: post.user_id } }
+
+      it 'is expected to set suggestion instance variable' do
         expect(assigns[:post]).to eq(Post.find_by(id: params[:id]))
       end
 
@@ -83,7 +113,7 @@ RSpec.describe PostsController, type: :controller do
       let(:current_user) { User.create!(id: 1, name: 'Saif Ali', email: 'saif@gmail.com', password: '123456') }
       let(:params) { { post: { user_id: current_user.id, name: 'Abc', title: 'Xyz', status: 'pending' } } }
 
-      it 'is expected to create new user successfully' do
+      it 'is expected to create new post successfully' do
         expect(assigns[:post]).to be_instance_of(Post)
       end
 
@@ -124,7 +154,7 @@ RSpec.describe PostsController, type: :controller do
           expect(post.reload.name).to eq('First Post')
         end
 
-        it 'is_expected to redirect_to users_path' do
+        it 'is_expected to redirect_to posts_path' do
           expect(response.status).to eq(302)
         end
 
@@ -188,21 +218,23 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe PostPolicy do
-    subject { described_class.new(user, post) }
+  describe 'Post #show' do
+    describe PostPolicy do
+      subject { described_class.new(user, post) }
 
-    let(:post) { Post.create }
+      let(:post) { Post.create }
 
-    context 'being a visitor' do
-      let(:user) { FactoryBot.create :user }
+      context 'being a visitor' do
+        let(:user) { FactoryBot.create :user }
 
-      it { is_expected.to forbid_action(:show) }
-    end
+        it { is_expected.to forbid_action(:show) }
+      end
 
-    context 'being an administrator' do
-      let(:user) { FactoryBot.create :user, role: 'admin' }
+      context 'being an administrator' do
+        let(:user) { FactoryBot.create :user, role: 'admin' }
 
-      it { is_expected.to permit_actions([:show]) }
+        it { is_expected.to permit_actions([:show]) }
+      end
     end
   end
 end

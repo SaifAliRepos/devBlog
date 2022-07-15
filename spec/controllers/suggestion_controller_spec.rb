@@ -9,6 +9,14 @@ RSpec.describe SuggestionsController, type: :controller do
     end
   end
 
+  describe 'before actions' do
+    describe 'set_approve' do
+      it 'is expected to define before action' do
+        is_expected.to use_before_action(:set_approve)
+      end
+    end
+  end
+
   describe 'GET #index' do
     before do
       get :index, params: { post_id: 1 }
@@ -43,16 +51,16 @@ RSpec.describe SuggestionsController, type: :controller do
       get :edit, params: params
     end
 
-    context 'when post id is valid' do
+    context 'when suggestion id is valid' do
       let(:post) { FactoryBot.create :post }
       let(:suggestion) { FactoryBot.create :suggestion }
       let(:params) { { id: suggestion.id, post_id: suggestion.post_id } }
 
-      it 'is expected to set post instance variable' do
+      it 'is expected to set sugestion instance variable' do
         expect(assigns[:suggestion]).to eq(Suggestion.find_by(id: params[:id]))
       end
 
-      it 'is expected to set user instance variable' do
+      it 'is expected to set post instance variable' do
         expect(assigns[:suggestion]).to eq(Suggestion.find_by(post_id: params[:post_id]))
       end
 
@@ -78,16 +86,16 @@ RSpec.describe SuggestionsController, type: :controller do
       get :show, params: params
     end
 
-    context 'when post id is valid' do
+    context 'when suggestion id is valid' do
       let(:post) { FactoryBot.create :post }
       let(:suggestion) { FactoryBot.create :suggestion }
       let(:params) { { id: suggestion.id, post_id: suggestion.post_id } }
 
-      it 'is expected to set post instance variable' do
+      it 'is expected to set suggestion instance variable' do
         expect(assigns[:suggestion]).to eq(Suggestion.find_by(id: params[:id]))
       end
 
-      it 'is expected to set user instance variable' do
+      it 'is expected to set post instance variable' do
         expect(assigns[:suggestion]).to eq(Suggestion.find_by(post_id: params[:post_id]))
       end
 
@@ -125,7 +133,7 @@ RSpec.describe SuggestionsController, type: :controller do
           expect(suggestion.reload.find).to eq('Hello')
         end
 
-        it 'is_expected to redirect_to users_path' do
+        it 'is_expected to redirect_to posts_path' do
           expect(response.status).to eq(302)
         end
 
@@ -139,7 +147,7 @@ RSpec.describe SuggestionsController, type: :controller do
         let(:suggestion) { FactoryBot.create :suggestion }
         let(:params) { { id: suggestion.id, post_id: suggestion.post_id, suggestion: { find: '' } } }
 
-        it 'is expected not to update user name' do
+        it 'is expected not to update suggestion.find' do
           expect(suggestion.reload.find).not_to be_empty
         end
 
@@ -174,10 +182,9 @@ RSpec.describe SuggestionsController, type: :controller do
   end
 
   describe 'POST #create' do
-
     before do
       # something that you want to execute before running `it` block
-      post :create, params: {post_id: 1}
+      post :create, params: { post_id: 1 }
     end
 
     context 'when post id is valid' do
@@ -197,27 +204,49 @@ RSpec.describe SuggestionsController, type: :controller do
         expect(response.status).to eq(302)
       end
     end
-
   end
-
 
   describe PostPolicy do
     subject { described_class.new(user, post) }
 
     let(:post) { Post.create }
 
-    context 'being a visitor' do
+    context 'not eligible user' do
       let(:user) { FactoryBot.create :user, role: 'user' }
 
       it { is_expected.to forbid_action(:approve) }
     end
 
-    context 'being an administrator' do
+    context 'eligible user' do
       let(:user) { FactoryBot.create :user, id: post.id, role: 'admin' }
 
       it { is_expected.to permit_actions([:approve]) }
     end
   end
 
+  describe SuggestionsController do
+    subject { described_class.new(user, post) }
+    before do
+      # something that you want to execute before running `it` block
+      put :update, params: params
+    end
 
+    context 'when user exist in database' do
+      let(:user) { FactoryBot.create :user, id: post.id, role: 'admin' }
+      let(:post) { FactoryBot.create :post }
+      let(:suggestion) { FactoryBot.create :suggestion }
+      let(:params) { { id: 1, post_id: post.id, suggestion_id: suggestion.id, user_id: 1 } }
+      # let(:post) { FactoryBot.create :post }
+      # let(:params) { { id: post.id, post: { name: 'First Post' } } }
+
+      context 'when params are valid' do
+
+        it 'is_expected to respond' do
+          expect(response.status).to eq(302)
+        end
+
+      end
+
+    end
+  end
 end
