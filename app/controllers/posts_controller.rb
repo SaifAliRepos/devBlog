@@ -16,18 +16,14 @@ class PostsController < ApplicationController
   end
 
   def report
-    return unless user_signed_in?
+    #return unless user_signed_in?
 
-    UserMailer.with(post: @post).report_email.deliver_now if user_signed_in?
+    UserMailer.with(post: @post).report_email.deliver_now #if user_signed_in?
   end
 
   # GET /posts or /posts.json
   def index
-    @posts = if current_user.role == 'admin' || current_user.role == 'moderator'
-               Post.not_publish_post.order(created_at: :desc)
-             else
-               Post.not_publish_post.where(user_id: current_user).order(created_at: :desc)
-             end
+    @posts = Post.all
   end
 
   def dashboard
@@ -35,7 +31,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    authorize @post
+    #authorize @post
   end
 
   def new
@@ -45,12 +41,14 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    @post = Post.new(post_params.merge(user_id: current_user.id))
+    @post = Post.new(post_params.merge(user_id: 1))
     respond_to do |format|
       if @post.save
         format.html { redirect_to post_url(@post), notice: 'Post was successfully created.' }
+        format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,8 +57,10 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to post_url(@post), notice: 'Post was successfully updated.' }
+        format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,7 +69,8 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_url, notice: "User was successfully destroyed." }
+      format.json { head :no_content }
     end
   end
 
