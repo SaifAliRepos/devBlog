@@ -5,6 +5,15 @@ Rails.application.routes.draw do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :posts do
+        post '/report/:id', to: 'posts#report', as: 'report'
+        resources :likes
+      end
+    end
+  end
+
   resources :posts do
     post '/report/:id', to: 'posts#report', as: 'report'
     resources :comments do
@@ -26,4 +35,5 @@ Rails.application.routes.draw do
 
   get 'home/index'
   root to: 'home#index'
+
 end
