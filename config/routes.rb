@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :posts do
         post '/report/:id', to: 'posts#report', as: 'report'
         resources :likes
+        resources :comments
       end
     end
   end
@@ -37,3 +38,4 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
 end
+

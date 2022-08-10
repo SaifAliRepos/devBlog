@@ -6,11 +6,12 @@ class Api::V1::PostsController < ApplicationController
 
   def report
     UserMailer.with(post: @post).report_email.deliver_now
+    render json: @post
   end
 
   def index
     @posts = Post.all
-    render json: @posts
+    render json: @posts, include: [:image_url]
   end
 
   def dashboard
@@ -57,10 +58,6 @@ class Api::V1::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:name, :title, :status, :image)
-  end
-
-  def set_suggestion
-    @suggestion = Suggestion.find(params[:id])
   end
 
 end
