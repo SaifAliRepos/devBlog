@@ -27,7 +27,7 @@ class Api::V1::PostsController < ApplicationController
     @post = Post.new(post_params.merge(user_id: 1))
     if @post.save
       render json: @post, status: :created, location: @post
-      puts "Post has been saved"
+      puts "Post has been saved!"
     else
       render json: @post.errors, status: :unprocessable_entity
       puts @post.errors.messages
