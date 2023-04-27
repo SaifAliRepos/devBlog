@@ -49,4 +49,4 @@ For now it cab be taken as a light instagram but in future we will ehance its fu
 * How to install and run: Clone this repo and run bundle install to setup all gems after that setup your account on cloudinary. In clude your secret keys, api etc in cloudinary.yml file once its up you can run rake db:migrate to create tables and then rake db:seed for seeding the default values. After that run your local server and post the blogs!
 
 
-* Credits: I want to thank google, stackoverflow and every single indivdual to guide me to acheive this objective.
+* Credits: I want to thank google, stackoverflow and every single indivdual on guiding me to acheive this objective.
